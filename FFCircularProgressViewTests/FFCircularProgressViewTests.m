@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface FFCircularProgressBarTests : XCTestCase
+@interface FFCircularProgressViewTests : XCTestCase
 
 @end
 
-@implementation FFCircularProgressBarTests
+@implementation FFCircularProgressViewTests
 
 - (void)setUp
 {
