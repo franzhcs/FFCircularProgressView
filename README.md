@@ -42,6 +42,10 @@ Just use it as it is a normal UIProgressView. Make sure you set the progress val
     });
 ```
 
+## Acknowledgments
+
+The code to draw the tick has been adapted from [GSProgressView](https://github.com/goosoftware/GSProgressView/blob/master/GSProgressView.m).
+
 ## License
 
 This code is distributed under the terms and conditions of the [MIT license](LICENSE). 

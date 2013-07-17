@@ -93,7 +93,18 @@
     }
 }
 
-#pragma mark - 
+#pragma mark -
+#pragma mark Setters
+
+- (void)setLineWidth:(CGFloat)lineWidth {
+    _lineWidth = lineWidth;
+    
+    _progressBackgroundLayer.lineWidth = _lineWidth;
+    _progressLayer.lineWidth = _lineWidth * 2.0;
+    _iconLayer.lineWidth = _lineWidth;
+}
+
+#pragma mark -
 #pragma mark Drawing
 
 - (void) drawTick {

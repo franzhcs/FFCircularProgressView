@@ -13,6 +13,6 @@
 @interface FFCircularProgressView : UIView
 
 @property (nonatomic, assign) CGFloat progress;
-@property (nonatomic, readonly) CGFloat lineWidth;
+@property (nonatomic, assign) CGFloat lineWidth;
 
 @end
