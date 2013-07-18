@@ -22,6 +22,7 @@
 @implementation FFCircularProgressView
 
 #define kArrowSizeRatio .15
+#define kArrowSizeRatio .12
 #define kStopSizeRatio  .35
 #define kTickWidthRatio .3
 
