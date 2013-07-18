@@ -36,7 +36,6 @@
         _progressBackgroundLayer.fillColor = self.backgroundColor.CGColor;
         _progressBackgroundLayer.lineCap = kCALineCapRound;
         _progressBackgroundLayer.lineWidth = _lineWidth;
-        _progressBackgroundLayer.frame = self.bounds;
         [self.layer addSublayer:_progressBackgroundLayer];
 
         self.progressLayer = [CAShapeLayer layer];
@@ -44,7 +43,6 @@
         _progressLayer.fillColor = nil;
         _progressLayer.lineCap = kCALineCapSquare;
         _progressLayer.lineWidth = _lineWidth * 2.0;
-        _progressLayer.frame= self.bounds;
         [self.layer addSublayer:_progressLayer];
 
         self.iconLayer = [CAShapeLayer layer];
@@ -61,6 +59,11 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    // Make sure the layers cover the whole view
+    _progressBackgroundLayer.frame = self.bounds;
+    _progressLayer.frame = self.bounds;
+    _iconLayer.frame = self.bounds;
+
     CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     CGFloat radius = (self.bounds.size.width - _lineWidth)/2;
 
