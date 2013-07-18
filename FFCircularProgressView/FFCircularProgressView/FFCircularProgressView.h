@@ -25,7 +25,7 @@
 /**
  * Make the background layer to spin around its center. This should be called in the main thread.
  */
-- (void) spinProgressBackgroundLayer;
+- (void) startSpinProgressBackgroundLayer;
 
 /**
  * Stop the spinning of the background layer. This should be called in the main thread.

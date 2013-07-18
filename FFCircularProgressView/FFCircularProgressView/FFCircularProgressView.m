@@ -235,7 +235,7 @@
     [_progressBackgroundLayer addAnimation:colorAnimation forKey:@"colorAnimation"];
 }
 
-- (void) spinProgressBackgroundLayer {
+- (void) startSpinProgressBackgroundLayer {
     self.isSpinning = YES;
     [self drawBackgroundCircle:YES];
     
