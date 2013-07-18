@@ -35,17 +35,24 @@
     
     [self.view addSubview:_circularPV];
 
-    double delayInSeconds = 2.0;
+    double delayInSeconds = 1;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
-            for (float i=0; i<1.1; i+=0.01F) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_circularPV setProgress:i];
-                });
-                usleep(10000);
-            }            
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_circularPV spinProgressBackgroundLayer];
+//            for (float i=0; i<1.1; i+=0.01F) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [_circularPV setProgress:i];
+//                });
+//                usleep(10000);
+//            }            
         });
+    });
+    
+    delayInSeconds = 5;
+    popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [_circularPV stopSpinProgressBackgroundLayer];
     });
 }
 

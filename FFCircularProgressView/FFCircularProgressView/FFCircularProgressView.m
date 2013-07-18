@@ -10,18 +10,15 @@
 #import "UIColor+iOS7.h"
 
 @interface FFCircularProgressView()
-
-@property (atomic, assign) CGFloat oldProgressValue;
-
 @property (nonatomic, strong) CAShapeLayer *progressBackgroundLayer;
 @property (nonatomic, strong) CAShapeLayer *progressLayer;
 @property (nonatomic, strong) CAShapeLayer *iconLayer;
 
+@property (nonatomic, assign) BOOL isSpinning;
 @end
 
 @implementation FFCircularProgressView
 
-#define kArrowSizeRatio .15
 #define kArrowSizeRatio .12
 #define kStopSizeRatio  .35
 #define kTickWidthRatio .3
@@ -39,6 +36,7 @@
         _progressBackgroundLayer.fillColor = self.backgroundColor.CGColor;
         _progressBackgroundLayer.lineCap = kCALineCapRound;
         _progressBackgroundLayer.lineWidth = _lineWidth;
+        _progressBackgroundLayer.frame = self.bounds;
         [self.layer addSublayer:_progressBackgroundLayer];
 
         self.progressLayer = [CAShapeLayer layer];
@@ -46,6 +44,7 @@
         _progressLayer.fillColor = nil;
         _progressLayer.lineCap = kCALineCapRound;
         _progressLayer.lineWidth = _lineWidth * 2.0;
+        _progressLayer.frame= self.bounds;
         [self.layer addSublayer:_progressLayer];
 
         self.iconLayer = [CAShapeLayer layer];
@@ -62,19 +61,15 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    // Draw background
-    UIBezierPath *processBackgroundPath = [UIBezierPath bezierPath];
-    processBackgroundPath.lineWidth = _lineWidth;
-    processBackgroundPath.lineCapStyle = kCGLineCapRound;
     CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     CGFloat radius = (self.bounds.size.width - _lineWidth)/2;
-    CGFloat startAngle = - ((float)M_PI / 2); // 90 degrees
-    CGFloat endAngle = (2 * (float)M_PI) + startAngle;
-    [processBackgroundPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
-    
-    _progressBackgroundLayer.path = processBackgroundPath.CGPath;
+
+    // Draw background
+    [self drawBackgroundCircle:_isSpinning];
 
     // Draw progress
+    CGFloat startAngle = - ((float)M_PI / 2); // 90 degrees
+    CGFloat endAngle = (2 * (float)M_PI) + startAngle;
     UIBezierPath *processPath = [UIBezierPath bezierPath];
     processPath.lineCapStyle = kCGLineCapButt;
     processPath.lineWidth = _lineWidth;
@@ -107,6 +102,26 @@
 
 #pragma mark -
 #pragma mark Drawing
+
+- (void) drawBackgroundCircle:(BOOL) partial {
+    CGFloat startAngle = - ((float)M_PI / 2); // 90 degrees
+    CGFloat endAngle = (2 * (float)M_PI) + startAngle;
+    CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
+    CGFloat radius = (self.bounds.size.width - _lineWidth)/2;
+    
+    // Draw background
+    UIBezierPath *processBackgroundPath = [UIBezierPath bezierPath];
+    processBackgroundPath.lineWidth = _lineWidth;
+    processBackgroundPath.lineCapStyle = kCGLineCapRound;
+    
+    if (partial) {
+        [processBackgroundPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:0 clockwise:YES];
+    } else {
+        [processBackgroundPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
+    }
+    
+    _progressBackgroundLayer.path = processBackgroundPath.CGPath;
+}
 
 - (void) drawTick {
     CGFloat radius = MIN(self.frame.size.width, self.frame.size.height)/2;
@@ -217,6 +232,24 @@
     colorAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     
     [_progressBackgroundLayer addAnimation:colorAnimation forKey:@"colorAnimation"];
+}
+
+- (void) spinProgressBackgroundLayer {
+    self.isSpinning = YES;
+    [self drawBackgroundCircle:YES];
+    
+    CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
+    rotationAnimation.duration = 1;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = HUGE_VALF;
+    [_progressBackgroundLayer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+}
+
+- (void) stopSpinProgressBackgroundLayer {
+    self.isSpinning = NO;
+    [_progressBackgroundLayer removeAllAnimations];
+    [self drawBackgroundCircle:NO];
 }
 
 @end
