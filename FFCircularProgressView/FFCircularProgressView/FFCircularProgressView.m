@@ -42,7 +42,7 @@
         self.progressLayer = [CAShapeLayer layer];
         _progressLayer.strokeColor = [UIColor colorWithIos7Blue].CGColor;
         _progressLayer.fillColor = nil;
-        _progressLayer.lineCap = kCALineCapRound;
+        _progressLayer.lineCap = kCALineCapSquare;
         _progressLayer.lineWidth = _lineWidth * 2.0;
         _progressLayer.frame= self.bounds;
         [self.layer addSublayer:_progressLayer];
@@ -199,6 +199,7 @@
     [path applyTransform:CGAffineTransformMakeTranslation(-segmentSize /2.0, -segmentSize / 1.2)];
     [path applyTransform:CGAffineTransformMakeTranslation(radius * (1-ratio), radius* (1-ratio))];
     _iconLayer.path = path.CGPath;
+    _iconLayer.fillColor = nil;
 }
 
 #pragma mark Setters
