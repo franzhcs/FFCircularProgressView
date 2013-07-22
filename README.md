@@ -28,18 +28,28 @@ You will need LLVM 3.0 or later in order to build FFCircularProgressView.
 Just use it as it is a normal UIProgressView. Make sure you set the progress value in the main thread ;)
 
 ```objective-c
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
-            for (float i=0; i<1.1; i+=0.01F) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_circularPV setProgress:i];
-                });
-                usleep(10000);
-            }            
-        });
+double delayInSeconds = 2.0;
+dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
+        for (float i=0; i<1.1; i+=0.01F) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [circularProgressView setProgress:i];
+            });
+            usleep(10000);
+        }            
     });
+});
+```
+
+You can also control the progress view spin animation by using the following two methods to start and stop the spinning, respectively:
+
+```objective-c
+// Start spinning
+[circularProgressView startSpinProgressBackgroundLayer];
+
+// Stop spinning
+[circularProgressView stopSpinProgressBackgroundLayer];
 ```
 
 ## Acknowledgments
