@@ -1,2 +1,1 @@
 language: objective-c
-script: "xcodebuild -scheme FFCircularProgressView -configuration Release"
