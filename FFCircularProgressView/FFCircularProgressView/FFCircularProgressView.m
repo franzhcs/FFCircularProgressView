@@ -217,6 +217,10 @@
             [self animateProgressBackgroundLayerFillColor];
         }
         
+        if (_progress == 0.0) {
+            _progressBackgroundLayer.fillColor = self.backgroundColor.CGColor;
+        }
+        
         [self setNeedsDisplay];
     }
 }
