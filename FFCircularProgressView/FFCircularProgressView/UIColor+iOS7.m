@@ -10,11 +10,11 @@
 
 @implementation UIColor (iOS7)
 
-+ (UIColor *) colorWithIos7Blue {
++ (UIColor *) ios7Blue {
     return [self colorWithRed:0 green:122/255.0 blue:1.0 alpha:1.0];
 }
 
-+ (UIColor *) colorWithIos7Gray {
++ (UIColor *) ios7Gray {
     return [self colorWithRed:181/255.0 green:182/255.0 blue:183/255.0 alpha:1.0];
 }
 

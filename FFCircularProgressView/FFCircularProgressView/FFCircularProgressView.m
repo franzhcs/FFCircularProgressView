@@ -20,7 +20,7 @@
 @implementation FFCircularProgressView
 
 #define kArrowSizeRatio .12
-#define kStopSizeRatio  .35
+#define kStopSizeRatio  .3
 #define kTickWidthRatio .3
 
 - (id)initWithFrame:(CGRect)frame
@@ -32,21 +32,21 @@
         _lineWidth = self.frame.size.width * 0.025;
         
         self.progressBackgroundLayer = [CAShapeLayer layer];
-        _progressBackgroundLayer.strokeColor = [UIColor colorWithIos7Gray].CGColor;
+        _progressBackgroundLayer.strokeColor = [UIColor ios7Blue].CGColor;
         _progressBackgroundLayer.fillColor = self.backgroundColor.CGColor;
         _progressBackgroundLayer.lineCap = kCALineCapRound;
         _progressBackgroundLayer.lineWidth = _lineWidth;
         [self.layer addSublayer:_progressBackgroundLayer];
 
         self.progressLayer = [CAShapeLayer layer];
-        _progressLayer.strokeColor = [UIColor colorWithIos7Blue].CGColor;
+        _progressLayer.strokeColor = [UIColor ios7Blue].CGColor;
         _progressLayer.fillColor = nil;
         _progressLayer.lineCap = kCALineCapSquare;
         _progressLayer.lineWidth = _lineWidth * 2.0;
         [self.layer addSublayer:_progressLayer];
 
         self.iconLayer = [CAShapeLayer layer];
-        _iconLayer.strokeColor = [UIColor colorWithIos7Blue].CGColor;
+        _iconLayer.strokeColor = [UIColor ios7Blue].CGColor;
         _iconLayer.fillColor = nil;
         _iconLayer.lineCap = kCALineCapButt;
         _iconLayer.lineWidth = _lineWidth;
@@ -117,12 +117,13 @@
     processBackgroundPath.lineWidth = _lineWidth;
     processBackgroundPath.lineCapStyle = kCGLineCapRound;
     
+    // Recompute the end angle to make it at 90% of the progress
     if (partial) {
-        [processBackgroundPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:M_PI clockwise:YES];
-    } else {
-        [processBackgroundPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
+        endAngle = (1.8F * (float)M_PI) + startAngle;
     }
-    
+
+    [processBackgroundPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
+
     _progressBackgroundLayer.path = processBackgroundPath.CGPath;
 }
 
@@ -178,7 +179,7 @@
     
     [_iconLayer setPath:stopPath.CGPath];
     [_iconLayer setStrokeColor:_progressLayer.strokeColor];
-    [_iconLayer setFillColor:[UIColor colorWithIos7Blue].CGColor];
+    [_iconLayer setFillColor:[UIColor ios7Blue].CGColor];
 }
 
 - (void) drawArrow {

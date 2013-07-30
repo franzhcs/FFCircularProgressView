@@ -10,7 +10,7 @@
 
 @interface UIColor (iOS7)
 
-+ (UIColor *) colorWithIos7Blue;
-+ (UIColor *) colorWithIos7Gray;
++ (UIColor *) ios7Blue;
++ (UIColor *) ios7Gray;
 
 @end
