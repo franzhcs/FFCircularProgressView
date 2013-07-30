@@ -118,7 +118,7 @@
     processBackgroundPath.lineCapStyle = kCGLineCapRound;
     
     if (partial) {
-        [processBackgroundPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:0 clockwise:YES];
+        [processBackgroundPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:M_PI clockwise:YES];
     } else {
         [processBackgroundPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
     }
@@ -255,9 +255,10 @@
 }
 
 - (void) stopSpinProgressBackgroundLayer {
-    self.isSpinning = NO;
-    [_progressBackgroundLayer removeAllAnimations];
     [self drawBackgroundCircle:NO];
+    
+    [_progressBackgroundLayer removeAllAnimations];
+    self.isSpinning = NO;
 }
 
 @end
