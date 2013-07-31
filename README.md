@@ -3,7 +3,7 @@ FFCircularProgressView [![Build Status](https://travis-ci.org/elbryan/FFCircular
 
 FFCircularProgressView - An iOS 7-inspired blue circular progress view
 
-![ss1](https://raw.github.com/elbryan/FFCircularProgressView/master/Media/ss1.png) ![ss2](https://raw.github.com/elbryan/FFCircularProgressView/master/Media/ss2.png) ![ss3](https://raw.github.com/elbryan/FFCircularProgressView/master/Media/ss3.png)
+![ss1](https://raw.github.com/elbryan/FFCircularProgressView/master/Media/ss1.png) ![ss2](https://raw.github.com/elbryan/FFCircularProgressView/master/Media/ss2.png) ![ss3](https://raw.github.com/elbryan/FFCircularProgressView/master/Media/ss3.png) ![ss1](https://raw.github.com/elbryan/FFCircularProgressView/master/Media/ss4.png)
 
 This progress view is inspired by the new progress view in the App Store, iOS 7. Also the colors are taken from there.
 
