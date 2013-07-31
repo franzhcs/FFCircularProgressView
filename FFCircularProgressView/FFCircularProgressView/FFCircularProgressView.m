@@ -155,7 +155,7 @@
     [tickPath applyTransform:CGAffineTransformMakeRotation(-M_PI_4)];
     
     // ...and move it into the right place.
-    [tickPath applyTransform:CGAffineTransformMakeTranslation(radius * .44, radius)];
+    [tickPath applyTransform:CGAffineTransformMakeTranslation(radius * .46, 1.02 * radius)];
     
     [_iconLayer setPath:tickPath.CGPath];
     [_iconLayer setFillColor:[UIColor whiteColor].CGColor];
