@@ -9,7 +9,7 @@ This progress view is inspired by the new progress view in the App Store, iOS 7.
 
 ## See it in action
 
- ![sample](https://raw.github.com/elbryan/FFCircularProgressView/master/Media/sample.gif)
+ [![sample](https://raw.github.com/elbryan/FFCircularProgressView/master/Media/sample.gif)](https://raw.github.com/elbryan/FFCircularProgressView/master/Media/sample.mov)
 
 ## Requirements
 
