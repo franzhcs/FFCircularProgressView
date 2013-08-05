@@ -23,6 +23,11 @@
 @property (nonatomic, assign) CGFloat lineWidth;
 
 /**
+ * The color of the progress view
+ */
+@property (nonatomic, strong) UIColor *tintColor;
+
+/**
  * Make the background layer to spin around its center. This should be called in the main thread.
  */
 - (void) startSpinProgressBackgroundLayer;
