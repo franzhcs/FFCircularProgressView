@@ -30,23 +30,24 @@
         self.backgroundColor = [UIColor clearColor];
         
         _lineWidth = self.frame.size.width * 0.025;
+        _tintColor = [UIColor ios7Blue];
         
         self.progressBackgroundLayer = [CAShapeLayer layer];
-        _progressBackgroundLayer.strokeColor = [UIColor ios7Blue].CGColor;
+        _progressBackgroundLayer.strokeColor = _tintColor.CGColor;
         _progressBackgroundLayer.fillColor = self.backgroundColor.CGColor;
         _progressBackgroundLayer.lineCap = kCALineCapRound;
         _progressBackgroundLayer.lineWidth = _lineWidth;
         [self.layer addSublayer:_progressBackgroundLayer];
 
         self.progressLayer = [CAShapeLayer layer];
-        _progressLayer.strokeColor = [UIColor ios7Blue].CGColor;
+        _progressLayer.strokeColor = _tintColor.CGColor;
         _progressLayer.fillColor = nil;
         _progressLayer.lineCap = kCALineCapSquare;
         _progressLayer.lineWidth = _lineWidth * 2.0;
         [self.layer addSublayer:_progressLayer];
 
         self.iconLayer = [CAShapeLayer layer];
-        _iconLayer.strokeColor = [UIColor ios7Blue].CGColor;
+        _iconLayer.strokeColor = _tintColor.CGColor;
         _iconLayer.fillColor = nil;
         _iconLayer.lineCap = kCALineCapButt;
         _iconLayer.lineWidth = _lineWidth;
@@ -55,6 +56,14 @@
         
     }
     return self;
+}
+
+- (void)setTintColor:(UIColor *)tintColor
+{
+    _tintColor = tintColor;
+    _progressBackgroundLayer.strokeColor = tintColor.CGColor;
+    _progressLayer.strokeColor = tintColor.CGColor;
+    _iconLayer.strokeColor = tintColor.CGColor;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -179,7 +188,7 @@
     
     [_iconLayer setPath:stopPath.CGPath];
     [_iconLayer setStrokeColor:_progressLayer.strokeColor];
-    [_iconLayer setFillColor:[UIColor ios7Blue].CGColor];
+    [_iconLayer setFillColor:self.tintColor.CGColor];
 }
 
 - (void) drawArrow {
