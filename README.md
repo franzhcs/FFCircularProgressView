@@ -63,3 +63,5 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 ## Attributions
 
 I do not demand to be mentioned in your apps nor to receive any kind of compensation if you use this code. Yet, I would like to have feedbacks if you use it and you like it.
+
+Follow me on Twitter: [@elbryanlos](https://twitter.com/elbryanlos)
