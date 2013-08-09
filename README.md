@@ -22,6 +22,24 @@ FFCircularProgressView works on iOS version > 5 and is compatible with both ARC 
 
 You will need LLVM 3.0 or later in order to build FFCircularProgressView.
 
+## Adding FFCircularProgressView to your project
+
+There are plenty of ways to add this view to your project.
+Make sure you add the aforementioned frameworks to your project as well.
+
+### GIT submodule
+
+You have the canonical `git submodule` option. Simply issue `git submodule add https://github.com/elbryan/FFCircularProgressView.git <path>` in your root folder of your repository.
+
+### CocoaPods
+
+1. Add a pod entry to your [Podfile](https://github.com/CocoaPods/CocoaPods/wiki/A-Podfile) dependencies file such as `pod 'FFCircularProgressView', '>= 0.1'.
+2. Install the pod(s) by running `pod install`.
+3. Import the progress view with `#import "FFCircularProgressView.h". Make sure you add both 'FFCircularProgressView.h' as well as 'UIColor+iOS7.h'.
+
+### Source files
+
+Manually add the source files to your project. The files you need are 'FFCircularProgressView.h', 'FFCircularProgressView.m', 'UIColor+iOS7.h', 'UIColor+iOS7.m'.
 
 ## Usage
 
