@@ -81,11 +81,11 @@
 
     // Draw progress
     CGFloat startAngle = - ((float)M_PI / 2); // 90 degrees
-    CGFloat endAngle = (2 * (float)M_PI) + startAngle;
+    // CGFloat endAngle = (2 * (float)M_PI) + startAngle;
+    CGFloat endAngle = (self.progress * 2 * (float)M_PI) + startAngle;
     UIBezierPath *processPath = [UIBezierPath bezierPath];
     processPath.lineCapStyle = kCGLineCapButt;
     processPath.lineWidth = _lineWidth;
-    endAngle = (self.progress * 2 * (float)M_PI) + startAngle;
 
     radius = (self.bounds.size.width - _lineWidth*4) / 2.0;
     [processPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
