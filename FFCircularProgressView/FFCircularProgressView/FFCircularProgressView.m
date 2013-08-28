@@ -87,7 +87,7 @@
     processPath.lineCapStyle = kCGLineCapButt;
     processPath.lineWidth = _lineWidth;
 
-    radius = (self.bounds.size.width - _lineWidth*4) / 2.0;
+    radius = (self.bounds.size.width - _lineWidth*3) / 2.0;
     [processPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
     
     [_progressLayer setPath:processPath.CGPath];
