@@ -29,7 +29,7 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
-        _lineWidth = self.frame.size.width * 0.025;
+        _lineWidth = fmaxf(self.frame.size.width * 0.025, 1.f);
         _tintColor = [UIColor ios7Blue];
         
         self.progressBackgroundLayer = [CAShapeLayer layer];
@@ -105,7 +105,7 @@
 #pragma mark Setters
 
 - (void)setLineWidth:(CGFloat)lineWidth {
-    _lineWidth = lineWidth;
+    _lineWidth = fmaxf(lineWidth, 1.f);
     
     _progressBackgroundLayer.lineWidth = _lineWidth;
     _progressLayer.lineWidth = _lineWidth * 2.0;
