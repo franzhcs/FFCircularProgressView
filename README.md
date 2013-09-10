@@ -86,6 +86,6 @@ Follow me on Twitter: [@elbryanlos](https://twitter.com/elbryanlos)
 
 ## Android
 
-Are you using Android? No problem! A couple of folks ported this progress view to Android and you can get it [here](https://github.com/torryharris/TH-ProgressButton).
+Are you an Android developer and you love this progress view? No problem! A couple of folks ported it to Android OS and you can get it [here](https://github.com/torryharris/TH-ProgressButton).
 
 Thank you guys!
