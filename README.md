@@ -83,3 +83,7 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 I do not demand to be mentioned in your apps nor to receive any kind of compensation if you use this code. Yet, I would like to have feedbacks if you use it and you like it.
 
 Follow me on Twitter: [@elbryanlos](https://twitter.com/elbryanlos)
+
+## Android version
+
+Are you using Android? No problem! A couple of folks ported it for Android and you can get it [here](https://github.com/torryharris/TH-ProgressButton).
