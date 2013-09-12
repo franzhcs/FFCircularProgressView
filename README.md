@@ -35,7 +35,7 @@ You have the canonical `git submodule` option. Simply issue `git submodule add h
 
 1. Add a pod entry to your [Podfile](https://github.com/CocoaPods/CocoaPods/wiki/A-Podfile) dependencies file such as `pod 'FFCircularProgressView', '>= 0.1'.
 2. Install the pod(s) by running `pod install`.
-3. Import the progress view with `#import "FFCircularProgressView.h". Make sure you add both 'FFCircularProgressView.h' as well as 'UIColor+iOS7.h'.
+3. Import the progress view with `#import "FFCircularProgressView.h" wherever you need in your project.
 
 ### Source files
 
