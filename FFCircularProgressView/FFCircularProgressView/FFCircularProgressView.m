@@ -45,6 +45,7 @@
     
     _lineWidth = fmaxf(self.frame.size.width * 0.025, 1.f);
     _tintColor = [UIColor ios7Blue];
+    _tickColor = [UIColor whiteColor];
     
     self.progressBackgroundLayer = [CAShapeLayer layer];
     _progressBackgroundLayer.strokeColor = _tintColor.CGColor;
@@ -75,6 +76,11 @@
     _progressBackgroundLayer.strokeColor = tintColor.CGColor;
     _progressLayer.strokeColor = tintColor.CGColor;
     _iconLayer.strokeColor = tintColor.CGColor;
+}
+
+- (void)setTickColor:(UIColor *)tickColor
+{
+    _tickColor = tickColor;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -178,7 +184,7 @@
     [tickPath applyTransform:CGAffineTransformMakeTranslation(radius * .46, 1.02 * radius)];
     
     [_iconLayer setPath:tickPath.CGPath];
-    [_iconLayer setFillColor:[UIColor whiteColor].CGColor];
+    [_iconLayer setFillColor:self.tickColor.CGColor];
     [_progressBackgroundLayer setFillColor:_progressLayer.strokeColor];
 }
 

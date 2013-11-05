@@ -28,6 +28,11 @@
 @property (nonatomic, strong) UIColor *tintColor;
 
 /**
+ * The color of the tick view
+ */
+@property (nonatomic, strong) UIColor *tickColor;
+
+/**
  * Make the background layer to spin around its center. This should be called in the main thread.
  */
 - (void) startSpinProgressBackgroundLayer;
