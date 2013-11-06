@@ -33,7 +33,7 @@ You have the canonical `git submodule` option. Simply issue `git submodule add h
 
 ### CocoaPods
 
-1. Add a pod entry to your [Podfile](https://github.com/CocoaPods/CocoaPods/wiki/A-Podfile) dependencies file such as `pod 'FFCircularProgressView', '>= 0.1'.
+1. Add a pod entry to your [Podfile](https://github.com/CocoaPods/CocoaPods/wiki/A-Podfile) dependencies file such as `pod 'FFCircularProgressView', '>= 0.1'`.
 2. Install the pod(s) by running `pod install`.
 3. Import the progress view with `#import "FFCircularProgressView.h" wherever you need in your project.
 
