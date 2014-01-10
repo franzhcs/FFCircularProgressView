@@ -33,6 +33,16 @@
 @property (nonatomic, strong) UIColor *tickColor;
 
 /**
+ * Icon view to be rendered instead of default arrow
+ */
+@property (nonatomic, strong) UIView* iconView;
+
+/**
+ * Bezier path to be rendered instead of icon view or default arrow
+ */
+@property (nonatomic, strong) UIBezierPath* iconPath;
+
+/**
  * Make the background layer to spin around its center. This should be called in the main thread.
  */
 - (void) startSpinProgressBackgroundLayer;
