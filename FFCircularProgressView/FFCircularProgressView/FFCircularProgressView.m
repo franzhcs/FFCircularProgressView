@@ -40,6 +40,17 @@
     return self;
 }
 
+- (void)setIconView:(UIView *)iconView
+{
+    if (_iconView)
+    {
+        [_iconView removeFromSuperview];
+    }
+    
+    _iconView = iconView;
+    [self addSubview:_iconView];
+}
+
 - (void)setup {
     self.backgroundColor = [UIColor clearColor];
     
@@ -114,7 +125,15 @@
     } else if (([self progress] > 0) && [self progress] < 1.0) {
         [self drawStop];
     } else {
-        [self drawArrow];
+        if (!self.iconView && !self.iconPath)
+        {
+            [self drawArrow];
+        }
+        else if (self.iconPath)
+        {
+            _iconLayer.path = self.iconPath.CGPath;
+            _iconLayer.fillColor = nil;
+        }
     }
 }
 
