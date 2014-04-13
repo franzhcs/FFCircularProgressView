@@ -59,6 +59,7 @@
     _tickColor = [UIColor whiteColor];
     
     self.progressBackgroundLayer = [CAShapeLayer layer];
+    _progressBackgroundLayer.contentsScale = [[UIScreen mainScreen] scale];
     _progressBackgroundLayer.strokeColor = _tintColor.CGColor;
     _progressBackgroundLayer.fillColor = self.backgroundColor.CGColor;
     _progressBackgroundLayer.lineCap = kCALineCapRound;
@@ -66,6 +67,7 @@
     [self.layer addSublayer:_progressBackgroundLayer];
     
     self.progressLayer = [CAShapeLayer layer];
+    _progressLayer.contentsScale = [[UIScreen mainScreen] scale];
     _progressLayer.strokeColor = _tintColor.CGColor;
     _progressLayer.fillColor = nil;
     _progressLayer.lineCap = kCALineCapSquare;
@@ -73,6 +75,7 @@
     [self.layer addSublayer:_progressLayer];
     
     self.iconLayer = [CAShapeLayer layer];
+    _iconLayer.contentsScale = [[UIScreen mainScreen] scale];
     _iconLayer.strokeColor = _tintColor.CGColor;
     _iconLayer.fillColor = nil;
     _iconLayer.lineCap = kCALineCapButt;
