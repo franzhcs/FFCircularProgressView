@@ -23,11 +23,6 @@
 @property (nonatomic, assign) CGFloat lineWidth;
 
 /**
- * The color of the progress view background
- */
-@property (nonatomic, strong) UIColor *overrideBackgroundColor;
-
-/**
  * The color of the progress view
  */
 @property (nonatomic, strong) UIColor *tintColor;

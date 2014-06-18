@@ -53,10 +53,7 @@
 
 - (void)setup {
     
-    if (_overrideBackgroundColor)
-        self.backgroundColor = _overrideBackgroundColor;
-    else
-        self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor clearColor];
     
     _lineWidth = fmaxf(self.frame.size.width * 0.025, 1.f);
     _tintColor = [UIColor ios7Blue];
