@@ -52,7 +52,11 @@
 }
 
 - (void)setup {
-    self.backgroundColor = [UIColor clearColor];
+    
+    if (_overrideBackgroundColor)
+        self.backgroundColor = _overrideBackgroundColor;
+    else
+        self.backgroundColor = [UIColor clearColor];
     
     _lineWidth = fmaxf(self.frame.size.width * 0.025, 1.f);
     _tintColor = [UIColor ios7Blue];
@@ -123,7 +127,10 @@
     if ([self progress] == 1.0) {
         [self drawTick];
     } else if (([self progress] > 0) && [self progress] < 1.0) {
-        [self drawStop];
+        
+        if (_showStopIcon)
+            [self drawStop];
+        
     } else {
         if (!self.iconView && !self.iconPath)
         {

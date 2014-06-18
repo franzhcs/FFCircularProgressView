@@ -23,6 +23,11 @@
 @property (nonatomic, assign) CGFloat lineWidth;
 
 /**
+ * The color of the progress view background
+ */
+@property (nonatomic, strong) UIColor *overrideBackgroundColor;
+
+/**
  * The color of the progress view
  */
 @property (nonatomic, strong) UIColor *tintColor;
@@ -41,6 +46,11 @@
  * Bezier path to be rendered instead of icon view or default arrow
  */
 @property (nonatomic, strong) UIBezierPath* iconPath;
+
+/**
+ * You can hide the stop icon which is show during progress
+ */
+@property (readwrite) BOOL showStopIcon;
 
 /**
  * Make the background layer to spin around its center. This should be called in the main thread.
