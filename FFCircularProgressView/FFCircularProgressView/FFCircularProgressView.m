@@ -128,7 +128,7 @@
         [self drawTick];
     } else if (([self progress] > 0) && [self progress] < 1.0) {
         
-        if (_showStopIcon)
+        if (!_hideStopIcon)
             [self drawStop];
         
     } else {

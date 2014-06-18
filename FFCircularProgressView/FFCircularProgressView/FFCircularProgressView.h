@@ -50,7 +50,7 @@
 /**
  * You can hide the stop icon which is show during progress
  */
-@property (readwrite) BOOL showStopIcon;
+@property (readwrite) BOOL hideStopIcon;
 
 /**
  * Make the background layer to spin around its center. This should be called in the main thread.
