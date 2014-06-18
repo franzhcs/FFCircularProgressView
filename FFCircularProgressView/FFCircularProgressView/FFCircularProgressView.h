@@ -43,6 +43,11 @@
 @property (nonatomic, strong) UIBezierPath* iconPath;
 
 /**
+ * You can hide the icons which are shown during progress
+ */
+@property (readwrite) BOOL hideProgressIcons;
+
+/**
  * Make the background layer to spin around its center. This should be called in the main thread.
  */
 - (void) startSpinProgressBackgroundLayer;

@@ -52,6 +52,7 @@
 }
 
 - (void)setup {
+    
     self.backgroundColor = [UIColor clearColor];
     
     _lineWidth = fmaxf(self.frame.size.width * 0.025, 1.f);
@@ -123,11 +124,15 @@
     if ([self progress] == 1.0) {
         [self drawTick];
     } else if (([self progress] > 0) && [self progress] < 1.0) {
-        [self drawStop];
+        
+        if (!_hideProgressIcons)
+            [self drawStop];
+        
     } else {
         if (!self.iconView && !self.iconPath)
         {
-            [self drawArrow];
+            if (!_hideProgressIcons)
+                [self drawArrow];
         }
         else if (self.iconPath)
         {
