@@ -106,7 +106,6 @@
     _iconLayer.frame = self.bounds;
 
     CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
-    CGFloat radius = (self.bounds.size.width - _lineWidth)/2;
 
     // Draw background
     [self drawBackgroundCircle:_isSpinning];
@@ -119,7 +118,7 @@
     processPath.lineCapStyle = kCGLineCapButt;
     processPath.lineWidth = _lineWidth;
 
-    radius = (self.bounds.size.width - _lineWidth*3) / 2.0;
+    CGFloat radius = (self.bounds.size.width - _lineWidth*3) / 2.0;
     [processPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
     
     [_progressLayer setPath:processPath.CGPath];
