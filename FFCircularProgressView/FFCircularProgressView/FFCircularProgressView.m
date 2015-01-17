@@ -22,6 +22,7 @@
 #define kArrowSizeRatio .12
 #define kStopSizeRatio  .3
 #define kTickWidthRatio .3
+#define kPlaySizeRatio  .4
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -133,8 +134,13 @@
     } else {
         if (!self.iconView && !self.iconPath)
         {
-            if (!_hideProgressIcons)
-                [self drawArrow];
+            if (!_hideProgressIcons) {
+                if(_usePlayIcon)
+                    [self drawPlay];
+                else
+                    [self drawArrow];
+            }
+            
         }
         else if (self.iconPath)
         {
@@ -256,6 +262,25 @@
     [path applyTransform:CGAffineTransformMakeTranslation(radius * (1-ratio), radius* (1-ratio))];
     _iconLayer.path = path.CGPath;
     _iconLayer.fillColor = nil;
+}
+
+- (void) drawPlay {
+    CGFloat radius = (self.bounds.size.width)/2;
+    CGFloat ratio = kPlaySizeRatio;
+    CGFloat sideSize = self.bounds.size.width * ratio;
+    
+    UIBezierPath *stopPath = [UIBezierPath bezierPath];
+    [stopPath moveToPoint:CGPointMake(.25*sideSize, 0)];
+    [stopPath addLineToPoint:CGPointMake(sideSize, .5*sideSize)];
+    [stopPath addLineToPoint:CGPointMake(.25*sideSize, sideSize)];
+    [stopPath closePath];
+    
+    // ...and move it into the right place.
+    [stopPath applyTransform:CGAffineTransformMakeTranslation(radius * (1-ratio), radius* (1-ratio))];
+    
+    [_iconLayer setPath:stopPath.CGPath];
+    [_iconLayer setStrokeColor:_progressLayer.strokeColor];
+    [_iconLayer setFillColor:self.tintColor.CGColor];
 }
 
 #pragma mark Setters

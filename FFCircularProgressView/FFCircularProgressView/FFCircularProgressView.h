@@ -48,6 +48,12 @@
 @property (readwrite) BOOL hideProgressIcons;
 
 /**
+ * Use the play icond instead of the download icon
+ */
+@property (readwrite) BOOL usePlayIcon;
+
+
+/**
  * Make the background layer to spin around its center. This should be called in the main thread.
  */
 - (void) startSpinProgressBackgroundLayer;
