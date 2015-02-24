@@ -33,6 +33,11 @@
 @property (nonatomic, strong) UIColor *tickColor;
 
 /**
+ * The color of the initial circle
+ */
+@property (nonatomic, strong) UIColor *startColor;
+
+/**
  * Icon view to be rendered instead of default arrow
  */
 @property (nonatomic, strong) UIView* iconView;
