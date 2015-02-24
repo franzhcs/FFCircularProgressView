@@ -89,15 +89,13 @@
 {
     _tintColor = tintColor;
     _progressBackgroundLayer.strokeColor = tintColor.CGColor;
-    
+    _iconLayer.strokeColor = tintColor.CGColor;
 }
 
 - (void)setTickColor:(UIColor *)tickColor
 {
     _tickColor = tickColor;
     _progressLayer.strokeColor = tickColor.CGColor;
-    _progressLayer.fillColor = tickColor.CGColor;
-    _iconLayer.strokeColor = tickColor.CGColor;
 }
 
 - (void)drawRect:(CGRect)rect
