@@ -48,6 +48,11 @@
 @property (readwrite) BOOL hideProgressIcons;
 
 /**
+ * You can hide the tick mark which is shown upon completion
+ */
+@property (readwrite) BOOL hideCompletionIcon;
+
+/**
  * Make the background layer to spin around its center. This should be called in the main thread.
  */
 - (void) startSpinProgressBackgroundLayer;
