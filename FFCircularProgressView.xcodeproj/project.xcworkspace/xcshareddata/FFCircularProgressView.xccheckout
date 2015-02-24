@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>BFCEF3C4-754D-4C0A-9746-2F5222F2D964</string>
+	<key>IDESourceControlProjectName</key>
+	<string>FFCircularProgressView</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>719AA8A1976C16731FBE34366E831E350F658FBD</key>
+		<string>https://github.com/CaseyB/FFCircularProgressView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>FFCircularProgressView.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>719AA8A1976C16731FBE34366E831E350F658FBD</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/CaseyB/FFCircularProgressView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>719AA8A1976C16731FBE34366E831E350F658FBD</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>719AA8A1976C16731FBE34366E831E350F658FBD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FFCircularProgressView</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -89,13 +89,13 @@
 {
     _tintColor = tintColor;
     _progressBackgroundLayer.strokeColor = tintColor.CGColor;
-    _progressLayer.strokeColor = tintColor.CGColor;
     _iconLayer.strokeColor = tintColor.CGColor;
 }
 
 - (void)setTickColor:(UIColor *)tickColor
 {
     _tickColor = tickColor;
+    _progressLayer.strokeColor = tickColor.CGColor;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -124,7 +124,9 @@
     [_progressLayer setPath:processPath.CGPath];
     
     if ([self progress] == 1.0) {
-        [self drawTick];
+        if (!_hideCompletionIcon)
+            [self drawTick];
+        [_progressBackgroundLayer setFillColor:_progressLayer.strokeColor];
     } else if (([self progress] > 0) && [self progress] < 1.0) {
         
         if (!_hideProgressIcons)
@@ -211,7 +213,6 @@
     
     [_iconLayer setPath:tickPath.CGPath];
     [_iconLayer setFillColor:self.tickColor.CGColor];
-    [_progressBackgroundLayer setFillColor:_progressLayer.strokeColor];
 }
 
 - (void) drawStop {

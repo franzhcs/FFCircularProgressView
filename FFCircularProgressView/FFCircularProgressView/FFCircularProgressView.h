@@ -33,6 +33,11 @@
 @property (nonatomic, strong) UIColor *tickColor;
 
 /**
+ * The color of the initial circle
+ */
+@property (nonatomic, strong) UIColor *startColor;
+
+/**
  * Icon view to be rendered instead of default arrow
  */
 @property (nonatomic, strong) UIView* iconView;
@@ -46,6 +51,11 @@
  * You can hide the icons which are shown during progress
  */
 @property (readwrite) BOOL hideProgressIcons;
+
+/**
+ * You can hide the tick mark which is shown upon completion
+ */
+@property (readwrite) BOOL hideCompletionIcon;
 
 /**
  * Make the background layer to spin around its center. This should be called in the main thread.
