@@ -126,7 +126,7 @@
     if ([self progress] == 1.0) {
         if (!_hideCompletionIcon)
             [self drawTick];
-        [_progressBackgroundLayer setFillColor:_progressBackgroundLayer.strokeColor];
+        [_progressBackgroundLayer setFillColor:_progressLayer.strokeColor];
     } else if (([self progress] > 0) && [self progress] < 1.0) {
         
         if (!_hideProgressIcons)
