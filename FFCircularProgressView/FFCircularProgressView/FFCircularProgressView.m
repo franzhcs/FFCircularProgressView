@@ -96,6 +96,7 @@
 {
     _tickColor = tickColor;
     _progressLayer.strokeColor = tickColor.CGColor;
+    _progressLayer.fillColor = tickColor.CGColor;
 }
 
 - (void)drawRect:(CGRect)rect
