@@ -7,7 +7,6 @@
 //
 
 #import "FFCircularProgressView.h"
-#import "UIColor+iOS7.h"
 
 @interface FFCircularProgressView()
 @property (nonatomic, strong) CAShapeLayer *progressBackgroundLayer;
@@ -15,6 +14,8 @@
 @property (nonatomic, strong) CAShapeLayer *iconLayer;
 
 @property (nonatomic, assign) BOOL isSpinning;
+
+@property (nonatomic, assign) BOOL isAnimatingProgressBackgroundLayerFillColor;
 @end
 
 @implementation FFCircularProgressView
@@ -52,16 +53,15 @@
 }
 
 - (void)setup {
-    
     self.backgroundColor = [UIColor clearColor];
     
     _lineWidth = fmaxf(self.frame.size.width * 0.025, 1.f);
-    _tintColor = [UIColor ios7Blue];
+    _progressColor = [UIColor colorWithRed:0 green:122/255.0 blue:1.0 alpha:1.0];
     _tickColor = [UIColor whiteColor];
     
     self.progressBackgroundLayer = [CAShapeLayer layer];
     _progressBackgroundLayer.contentsScale = [[UIScreen mainScreen] scale];
-    _progressBackgroundLayer.strokeColor = _tintColor.CGColor;
+    _progressBackgroundLayer.strokeColor = _progressColor.CGColor;
     _progressBackgroundLayer.fillColor = self.backgroundColor.CGColor;
     _progressBackgroundLayer.lineCap = kCALineCapRound;
     _progressBackgroundLayer.lineWidth = _lineWidth;
@@ -69,7 +69,7 @@
     
     self.progressLayer = [CAShapeLayer layer];
     _progressLayer.contentsScale = [[UIScreen mainScreen] scale];
-    _progressLayer.strokeColor = _tintColor.CGColor;
+    _progressLayer.strokeColor = _progressColor.CGColor;
     _progressLayer.fillColor = nil;
     _progressLayer.lineCap = kCALineCapSquare;
     _progressLayer.lineWidth = _lineWidth * 2.0;
@@ -77,17 +77,26 @@
     
     self.iconLayer = [CAShapeLayer layer];
     _iconLayer.contentsScale = [[UIScreen mainScreen] scale];
-    _iconLayer.strokeColor = _tintColor.CGColor;
+    _iconLayer.strokeColor = _progressColor.CGColor;
     _iconLayer.fillColor = nil;
     _iconLayer.lineCap = kCALineCapButt;
     _iconLayer.lineWidth = _lineWidth;
     _iconLayer.fillRule = kCAFillRuleNonZero;
     [self.layer addSublayer:_iconLayer];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
 }
 
-- (void)setTintColor:(UIColor *)tintColor
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)setProgressColor:(UIColor *)tintColor
 {
-    _tintColor = tintColor;
+    _progressColor = tintColor;
     _progressBackgroundLayer.strokeColor = tintColor.CGColor;
     _progressLayer.strokeColor = tintColor.CGColor;
     _iconLayer.strokeColor = tintColor.CGColor;
@@ -106,6 +115,7 @@
     _iconLayer.frame = self.bounds;
 
     CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
+    CGFloat radius = (self.bounds.size.width - _lineWidth)/2;
 
     // Draw background
     [self drawBackgroundCircle:_isSpinning];
@@ -118,30 +128,42 @@
     processPath.lineCapStyle = kCGLineCapButt;
     processPath.lineWidth = _lineWidth;
 
-    CGFloat radius = (self.bounds.size.width - _lineWidth*3) / 2.0;
+    radius = (self.bounds.size.width - _lineWidth*3) / 2.0;
     [processPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
     
     [_progressLayer setPath:processPath.CGPath];
-    
-    if ([self progress] == 1.0) {
-        [self drawTick];
-    } else if (([self progress] > 0) && [self progress] < 1.0) {
-        
-        if (!_hideProgressIcons)
-            [self drawStop];
-        
-    } else {
-        if (!self.iconView && !self.iconPath)
-        {
-            if (!_hideProgressIcons)
+
+    switch (_circularState) {
+        case FFCircularStateStop:
+             [self drawStop];
+            break;
+            
+        case FFCircularStateStopSpinning:
+             [self drawStop];
+            break;
+            
+        case FFCircularStateStopProgress:
+             [self drawStop];
+            break;
+            
+        case FFCircularStateCompleted:
+             [self drawTick];
+            break;
+            
+        case FFCircularStateIcon:
+            if (!self.iconView && !self.iconPath){
                 [self drawArrow];
-        }
-        else if (self.iconPath)
-        {
-            _iconLayer.path = self.iconPath.CGPath;
-            _iconLayer.fillColor = nil;
-        }
+            }
+            else if (self.iconPath){
+                _iconLayer.path = self.iconPath.CGPath;
+                _iconLayer.fillColor = nil;
+            }
+            break;
+            
+        default:
+            break;
     }
+    
 }
 
 #pragma mark -
@@ -231,15 +253,18 @@
     
     [_iconLayer setPath:stopPath.CGPath];
     [_iconLayer setStrokeColor:_progressLayer.strokeColor];
-    [_iconLayer setFillColor:self.tintColor.CGColor];
+    [_iconLayer setFillColor:self.progressColor.CGColor];
 }
 
 - (void) drawArrow {
+    _iconLayer.path = [self downArrowPath].CGPath;
+    _iconLayer.fillColor = nil;
+}
+
+- (UIBezierPath *)downArrowPath{
     CGFloat radius = (self.bounds.size.width)/2;
     CGFloat ratio = kArrowSizeRatio;
     CGFloat segmentSize = self.bounds.size.width * ratio;
-
-    // Draw icon
     
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(0.0, 0.0)];
@@ -251,11 +276,35 @@
     [path addLineToPoint:CGPointMake(0.0, segmentSize)];
     [path addLineToPoint:CGPointMake(0.0, 0.0)];
     [path closePath];
-
+    
     [path applyTransform:CGAffineTransformMakeTranslation(-segmentSize /2.0, -segmentSize / 1.2)];
     [path applyTransform:CGAffineTransformMakeTranslation(radius * (1-ratio), radius* (1-ratio))];
-    _iconLayer.path = path.CGPath;
-    _iconLayer.fillColor = nil;
+    return path;
+}
+
+- (UIBezierPath *)upArrowPath{
+    CGFloat radius = (self.bounds.size.width)/2;
+    CGFloat ratio = kArrowSizeRatio;
+    CGFloat segmentSize = self.bounds.size.width * ratio;
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0.0, 0.0)];
+    [path addLineToPoint:CGPointMake(segmentSize * 2.0, 0.0)];
+    [path addLineToPoint:CGPointMake(segmentSize * 2.0, segmentSize)];
+    [path addLineToPoint:CGPointMake(segmentSize * 3.0, segmentSize)];
+    [path addLineToPoint:CGPointMake(segmentSize, segmentSize * 3.3)];
+    [path addLineToPoint:CGPointMake(-segmentSize, segmentSize)];
+    [path addLineToPoint:CGPointMake(0.0, segmentSize)];
+    [path addLineToPoint:CGPointMake(0.0, 0.0)];
+    [path closePath];
+    
+
+    [path applyTransform:CGAffineTransformMakeRotation(M_PI)];
+    [path applyTransform:CGAffineTransformMakeTranslation(radius * 1.0, 1.0 * radius)];
+    [path applyTransform:CGAffineTransformMakeTranslation(segmentSize, segmentSize *1.3)];
+   
+    return path;
+ 
 }
 
 #pragma mark Setters
@@ -278,11 +327,90 @@
     }
 }
 
+- (void)setCircularState:(enum FFCircularState)state{
+    
+    if (_circularState != state) {
+        
+        _circularState = state;
+
+        switch (_circularState) {
+            case FFCircularStateStop:
+                [self setProgress:0];
+                if(self.isSpinning){
+                    [self stopSpinProgressBackgroundLayer];
+                }
+                if(self.isAnimatingProgressBackgroundLayerFillColor){
+                    [self stopAnimatingProgressBackgroundLayerFillColor];
+                }
+                break;
+                
+            case FFCircularStateStopSpinning:
+                [self setProgress:0];
+                if(self.isSpinning==NO){
+                    [self startSpinProgressBackgroundLayer];
+                }
+                if(self.isAnimatingProgressBackgroundLayerFillColor){
+                    [self stopAnimatingProgressBackgroundLayerFillColor];
+                }
+                break;
+                
+            case FFCircularStateStopProgress:
+                if(self.isSpinning){
+                    [self stopSpinProgressBackgroundLayer];
+                }
+                if(self.isAnimatingProgressBackgroundLayerFillColor){
+                    [self stopAnimatingProgressBackgroundLayerFillColor];
+                }
+                break;
+                
+            case FFCircularStateCompleted:
+                [self setProgress:1.0];
+                if(self.isSpinning){
+                    [self stopSpinProgressBackgroundLayer];
+                }
+                break;
+                
+            case FFCircularStateIcon:
+                [self setProgress:0];
+                if(self.isSpinning){
+                    [self stopSpinProgressBackgroundLayer];
+                }
+                if(self.isAnimatingProgressBackgroundLayerFillColor){
+                    [self stopAnimatingProgressBackgroundLayerFillColor];
+                }
+                break;
+                
+            default:
+                break;
+        }
+        
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)tintColorDidChange{
+    if(self.tintColor){
+        [self setProgressColor:self.tintColor];
+    }
+    else{
+        [self setProgressColor:[UIColor colorWithRed:0 green:122/255.0 blue:1.0 alpha:1.0]];
+    }
+}
+
+- (void)setHighlighted:(BOOL)highlighted{
+    [super setHighlighted:highlighted];
+    if(highlighted){
+        self.alpha = .5;
+    }
+    else{
+        self.alpha = 1.0;
+    }
+}
+
 #pragma mark Animations
 
-- (void) animateProgressBackgroundLayerFillColor {
+- (void)animateProgressBackgroundLayerFillColor {
     CABasicAnimation *colorAnimation = [CABasicAnimation animationWithKeyPath:@"fillColor"];
-    
     colorAnimation.duration = .5;
     colorAnimation.repeatCount = 1.0;
     colorAnimation.removedOnCompletion = NO;
@@ -293,9 +421,17 @@
     colorAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     
     [_progressBackgroundLayer addAnimation:colorAnimation forKey:@"colorAnimation"];
+    
+    self.isAnimatingProgressBackgroundLayerFillColor = YES;
 }
 
-- (void) startSpinProgressBackgroundLayer {
+- (void)stopAnimatingProgressBackgroundLayerFillColor{
+    [_progressBackgroundLayer removeAnimationForKey:@"colorAnimation"];
+    _progressBackgroundLayer.fillColor = self.backgroundColor.CGColor;
+    self.isAnimatingProgressBackgroundLayerFillColor = NO;
+}
+
+- (void)startSpinProgressBackgroundLayer {
     self.isSpinning = YES;
     [self drawBackgroundCircle:YES];
     
@@ -309,9 +445,33 @@
 
 - (void) stopSpinProgressBackgroundLayer {
     [self drawBackgroundCircle:NO];
-    
     [_progressBackgroundLayer removeAllAnimations];
     self.isSpinning = NO;
+}
+
+- (void)restartAnimation{
+    BOOL shouldStart = self.isSpinning;
+    self.isSpinning = YES;
+    [self stopSpinProgressBackgroundLayer];
+    if(shouldStart){
+        [self startSpinProgressBackgroundLayer];
+    }
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview{
+    [super willMoveToSuperview:newSuperview];
+    [self restartAnimation];
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow{
+    [super willMoveToWindow:newWindow];
+    [self restartAnimation];
+}
+
+#pragma mark - Notification
+
+- (void)applicationWillEnterForeground:(NSNotification*)notification{
+    [self restartAnimation];
 }
 
 @end
