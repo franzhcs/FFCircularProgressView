@@ -10,7 +10,16 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-@interface FFCircularProgressView : UIView
+
+NS_ENUM (NSInteger, FFCircularState){
+    FFCircularStateStop = 0,
+    FFCircularStateStopSpinning,
+    FFCircularStateStopProgress,
+    FFCircularStateCompleted,
+    FFCircularStateIcon,
+};
+
+@interface FFCircularProgressView : UIControl
 
 /**
  * The progress of the view.
@@ -25,7 +34,7 @@
 /**
  * The color of the progress view
  */
-@property (nonatomic, strong) UIColor *tintColor;
+@property (nonatomic, strong) UIColor *progressColor;
 
 /**
  * The color of the tick view
@@ -42,10 +51,9 @@
  */
 @property (nonatomic, strong) UIBezierPath* iconPath;
 
-/**
- * You can hide the icons which are shown during progress
- */
-@property (readwrite) BOOL hideProgressIcons;
+- (UIBezierPath *)downArrowPath;
+
+- (UIBezierPath *)upArrowPath;
 
 /**
  * Make the background layer to spin around its center. This should be called in the main thread.
@@ -57,5 +65,9 @@
  * WARN: This implementation remove all animations from background layer.
  **/
 - (void) stopSpinProgressBackgroundLayer;
+
+@property (nonatomic, readonly, assign) BOOL isSpinning;
+
+@property (nonatomic, assign)enum FFCircularState circularState;
 
 @end
