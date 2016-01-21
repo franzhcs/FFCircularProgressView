@@ -51,6 +51,11 @@ NS_ENUM (NSInteger, FFCircularState){
  */
 @property (nonatomic, strong) UIBezierPath* iconPath;
 
+/**
+ * Indicates if the component is spinning
+ */
+@property (readonly) BOOL isSpinning;
+
 - (UIBezierPath *)downArrowPath;
 
 - (UIBezierPath *)upArrowPath;
