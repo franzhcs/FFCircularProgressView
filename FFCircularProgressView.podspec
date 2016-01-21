@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "FFCircularProgressView"
-  s.version      = "0.3"
+  s.version      = "0.6"
   s.summary      = "An iOS 7-inspired blue circular progress view."
   s.description  = <<-DESC
                     This circular progress view is inspired by the new progress view in the App Store, iOS 7.
