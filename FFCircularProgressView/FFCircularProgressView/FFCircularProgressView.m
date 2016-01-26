@@ -100,6 +100,10 @@
     _progressBackgroundLayer.strokeColor = tintColor.CGColor;
     _progressLayer.strokeColor = tintColor.CGColor;
     _iconLayer.strokeColor = tintColor.CGColor;
+    
+    if (self.progress == 1.) {
+        _progressBackgroundLayer.fillColor = tintColor.CGColor;
+    }
 }
 
 - (void)setTickColor:(UIColor *)tickColor
