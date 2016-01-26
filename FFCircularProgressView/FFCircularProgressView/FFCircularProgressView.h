@@ -11,7 +11,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 
-NS_ENUM (NSInteger, FFCircularState){
+typedef NS_ENUM (NSInteger, FFCircularState){
     FFCircularStateStop = 0,
     FFCircularStateStopSpinning,
     FFCircularStateStopProgress,
