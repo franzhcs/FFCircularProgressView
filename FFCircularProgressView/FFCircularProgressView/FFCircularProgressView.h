@@ -56,6 +56,8 @@ typedef NS_ENUM (NSInteger, FFCircularState){
  */
 @property (nonatomic, readonly) BOOL isSpinning;
 
+@property (nonatomic, assign)enum FFCircularState circularState;
+
 
 - (UIBezierPath *)downArrowPath;
 
@@ -71,9 +73,5 @@ typedef NS_ENUM (NSInteger, FFCircularState){
  * WARN: This implementation remove all animations from background layer.
  **/
 - (void) stopSpinProgressBackgroundLayer;
-
-@property (nonatomic, readonly, assign) BOOL isSpinning;
-
-@property (nonatomic, assign)enum FFCircularState circularState;
 
 @end
