@@ -85,13 +85,12 @@ I do not demand to be mentioned in your apps nor to receive any kind of compensa
 Follow me on Twitter: [@elbryanlos](https://twitter.com/elbryanlos)
 
 ## Third Party Bindings
-  		  
-### React Native
-You may now use this library with [React Native](https://github.com/facebook/react-native) via the module [here](https://github.com/prscX/react-native-download-button)
-
 
 ### Android
 
 Are you an Android developer and you love this progress view? No problem! A couple of folks ported it to Android OS and you can get it [here](https://github.com/torryharris/TH-ProgressButton).
+  		  
+### React Native
+You may now use this library with [React Native](https://github.com/facebook/react-native) via the module [here](https://github.com/prscX/react-native-download-button)
 
 Thank you guys!
